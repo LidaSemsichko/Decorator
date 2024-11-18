@@ -1,10 +1,20 @@
 package com.example.lab10;
 
-public class SmartDocument implements Document{
-    public String parse(String path){
-        // API CALL 0.1 USD
-        // 1. Cache results
-        // 2. Compute time
-        return "hello";
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+
+import java.io.File;
+
+public class SmartDocument implements Document {
+    public String parse(String filePath) {
+        Tesseract tesseract = new Tesseract();
+        tesseract.setDatapath("C:\\Users\\user\\Desktop\\OOP\\Decorator");
+        tesseract.setLanguage("eng");
+        try {
+            return tesseract.doOCR(new File(filePath));
+        } catch (TesseractException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
